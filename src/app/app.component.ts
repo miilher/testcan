@@ -71,11 +71,18 @@ export class AppComponent implements OnInit {
       .catch(console.error);
   }
 
+
+  public cameraWasSwitched(deviceId: string): void {
+    console.log('active device: ' + deviceId);
+    this.deviceId = deviceId;
+  }
+
+  
   public get triggerObservable(): Observable<void> {
     return this.trigger.asObservable();
   }
 
-  
+
   public get nextWebcamObservable(): Observable<boolean|string> {
     return this.nextWebcam.asObservable();
   }
