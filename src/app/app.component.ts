@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { Subject , Observable } from 'rxjs';
 import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
+import * as Tesseract from 'tesseract.js';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +11,11 @@ import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
 export class AppComponent implements OnInit {
   // toggle webcam on/off
   public showWebcam = true;
-  public allowCameraSwitch = true;
+  public allowCameraSwitch = false;
   public multipleWebcamsAvailable = false;
   public deviceId: string;
+  public ocrGenericImage: any = null;
+  public ocrReturn: any = null;
   public videoOptions: MediaTrackConstraints = {
     // width: {ideal: 1024},
     // height: {ideal: 576}
@@ -56,6 +59,15 @@ export class AppComponent implements OnInit {
   public handleImage(webcamImage: WebcamImage): void {
     console.info('imagem recebida', webcamImage);
     this.webcamImage = webcamImage;
+    this.ocrGenericImage = this.webcamImage;
+    Tesseract
+    .recognize(this.ocrGenericImage.imageAsDataUrl)
+    .progress(console.log)
+    .then((res: any) => {
+        console.log(res);
+        this.ocrReturn = res;
+    })
+    .catch(console.error);
   }
 
   public get triggerObservable(): Observable<void> {

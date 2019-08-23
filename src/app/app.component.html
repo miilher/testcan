@@ -25,4 +25,6 @@
   <ul *ngFor="let error of errors" style="text-align: center; list-style-type: none;">
     <li>{{error | json}}</li>
   </ul>
+
+  <div *ngIf="ocrReturn !== null">{{ ocrReturn }}</div>
 </section>
