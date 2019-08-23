@@ -42,6 +42,10 @@ export class AppComponent implements OnInit {
     this.errors.push(error);
   }
 
+  public toggleWebcam(): void {
+    this.showWebcam = !this.showWebcam;
+  }
+
   public showNextWebcam(directionOrDeviceId: boolean|string): void {
     // true => move forward through devices
     // false => move backwards through devices
