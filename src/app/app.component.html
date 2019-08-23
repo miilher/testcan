@@ -5,9 +5,12 @@
     </h1>
 
     <div  style="display:grid; align-items: center; justify-content: center ">
-      <webcam [height]="350" [width]="350" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" (cameraSwitched)="cameraWasSwitched($event)"
-        *ngIf="showWebcam" [allowCameraSwitch]="allowCameraSwitch" [videoOptions]="videoOptions" [switchCamera]="nextWebcamObservable" [imageQuality]="1" 
-        (initError)="handleInitError($event)"></webcam>
+      <webcam [height]="350" [width]="350" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+      [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+      [videoOptions]="videoOptions"
+      [imageQuality]="1"
+      (cameraSwitched)="cameraWasSwitched($event)"
+      (initError)="handleInitError($event)"></webcam>
       <div class="actions">
         <button class="actionBtn" (click)="triggerSnapshot();">Click</button>
         <button class="actionBtn" (click)="toggleWebcam();">isOpen</button>

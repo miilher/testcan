@@ -12,7 +12,7 @@ import * as Tesseract from 'tesseract.js';
 export class AppComponent implements OnInit {
   // toggle webcam on/off
   public showWebcam = true;
-  public allowCameraSwitch = false;
+  public allowCameraSwitch = true;
   public multipleWebcamsAvailable = false;
   public deviceId: string;
   public ocrGenericImage: any = null;
@@ -77,7 +77,7 @@ export class AppComponent implements OnInit {
     this.deviceId = deviceId;
   }
 
-  
+
   public get triggerObservable(): Observable<void> {
     return this.trigger.asObservable();
   }
