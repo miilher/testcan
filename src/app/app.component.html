@@ -1,0 +1,28 @@
+<section style="width: 70%; margin : 0 auto">
+  <div style="text-align:center">
+    <h1>
+      cam test
+    </h1>
+
+    <div *ngIf="errors === []" style="display:grid; align-items: center; justify-content: center ">
+      <webcam [height]="350" [width]="350" [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
+        *ngIf="showWebcam" [allowCameraSwitch]="allowCameraSwitch" [videoOptions]="videoOptions" [imageQuality]="1"
+        (initError)="handleInitError($event)"></webcam>
+      <div class="actions">
+        <button class="actionBtn" (click)="triggerSnapshot();">Click</button>
+        <button class="actionBtn" (click)="toggleWebcam();">isOpen</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="snapshot" *ngIf="webcamImage">
+    <h2>clicked!</h2>
+    <img [src]="webcamImage.imageAsDataUrl" />
+  </div>
+
+  <h4 *ngIf="errors.length > 0" style="text-align: center">Messages:</h4>
+  <ul *ngFor="let error of errors" style="text-align: center; list-style-type: none;">
+    <li>{{error | json}}</li>
+  </ul>
+</section>
