@@ -75,4 +75,9 @@ export class AppComponent implements OnInit {
     return this.trigger.asObservable();
   }
 
+  
+  public get nextWebcamObservable(): Observable<boolean|string> {
+    return this.nextWebcam.asObservable();
+  }
+
 }
