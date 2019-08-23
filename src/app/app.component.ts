@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import { Subject , Observable } from 'rxjs';
-import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
+import { Component, OnInit } from '@angular/core';
+import { Subject, Observable } from 'rxjs';
+import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import * as Tesseract from 'tesseract.js';
+
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,7 @@ export class AppComponent implements OnInit {
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
   // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
-  private nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
+  private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
 
   public ngOnInit(): void {
     WebcamUtil.getAvailableVideoInputs()
@@ -49,7 +50,7 @@ export class AppComponent implements OnInit {
     this.showWebcam = !this.showWebcam;
   }
 
-  public showNextWebcam(directionOrDeviceId: boolean|string): void {
+  public showNextWebcam(directionOrDeviceId: boolean | string): void {
     // true => move forward through devices
     // false => move backwards through devices
     // string => move to device with given deviceId
@@ -61,13 +62,13 @@ export class AppComponent implements OnInit {
     this.webcamImage = webcamImage;
     this.ocrGenericImage = this.webcamImage;
     Tesseract
-    .recognize(this.ocrGenericImage.imageAsDataUrl)
-    .progress(console.log)
-    .then((res: any) => {
+      .recognize(this.ocrGenericImage.imageAsDataUrl)
+      .progress(console.log)
+      .then((res: any) => {
         console.log(res);
         this.ocrReturn = res;
-    })
-    .catch(console.error);
+      })
+      .catch(console.error);
   }
 
   public get triggerObservable(): Observable<void> {
